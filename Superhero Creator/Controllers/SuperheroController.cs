@@ -38,13 +38,20 @@ namespace Superhero_Creator.Controllers
         [HttpPost]
         public ActionResult Create([Bind("Id,Name,AltEgo,PrimAbility,SecAbility,CatchPhrase")] Superhero superhero)
         {
-            try
+            if (ModelState.IsValid)
             {
-                _context.Superheroes.Add(superhero);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Superheroes.Add(superhero);
+                    _context.SaveChanges();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    return View();
+                }
             }
-            catch
+            else
             {
                 return View();
             }

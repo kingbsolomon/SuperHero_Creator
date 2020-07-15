@@ -10,6 +10,7 @@ namespace Superhero_Creator.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required(ErrorMessage ="Hey dumbass, enter a name")]
         public string Name { get; set; }
         public string AltEgo { get; set; }
         public string PrimAbility { get; set; }
