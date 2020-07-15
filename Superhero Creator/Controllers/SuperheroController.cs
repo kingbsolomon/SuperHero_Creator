@@ -25,7 +25,8 @@ namespace Superhero_Creator.Controllers
         // GET: SuperheroController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var superhero = _context.Superheroes.Find(id);
+            return View(superhero);
         }
         // GET: SuperheroController/Create
         public ActionResult Create()
@@ -49,9 +50,10 @@ namespace Superhero_Creator.Controllers
             }
         }
         // GET: SuperheroController/Edit/5
-        public ActionResult Edit([Bind("Id,Name,AltEgo,PrimAbility,SecAbility,CatchPhrase")] Superhero superhero)
+        public ActionResult Edit(int id)
         {
-            return View();
+            var superhero = _context.Superheroes.Find(id);
+            return View(superhero);
         }
         // POST: SuperheroController/Edit/5
         [HttpPost]
@@ -60,6 +62,8 @@ namespace Superhero_Creator.Controllers
         {
             try
             {
+                var superhero = _context.Superheroes.Find(id);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -78,7 +82,7 @@ namespace Superhero_Creator.Controllers
         // POST: SuperheroController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Superhero superhero)
         {
             try
             {
